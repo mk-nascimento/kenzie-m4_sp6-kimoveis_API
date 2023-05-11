@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import * as ctrl from '../controllers';
 import * as mw from '../middlewares';
 import * as schemas from '../schemas';

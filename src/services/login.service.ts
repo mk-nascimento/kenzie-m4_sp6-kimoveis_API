@@ -1,6 +1,7 @@
 import 'dotenv/config';
 
 import { compare } from 'bcryptjs';
+import { StatusCodes } from 'http-status-codes';
 import { sign } from 'jsonwebtoken';
 import { Repository } from 'typeorm';
 
@@ -14,10 +15,10 @@ export const loginService = async (loginPayload: t.Tlogin): Promise<t.TToken> =>
     const userRepo: Repository<User> = AppDataSource.getRepository(User);
 
     const dbUser: User | null = await userRepo.findOneBy({ email: loginPayload.email });
-    if (!!!dbUser) throw new AppError('Invalid credentials', 401);
+    if (!!!dbUser) throw new AppError('Invalid credentials', StatusCodes.UNAUTHORIZED);
 
     const validPassword: boolean = await compare(loginPayload.password, dbUser?.password!);
-    if (!!!validPassword) throw new AppError('Invalid credentials', 401);
+    if (!!!validPassword) throw new AppError('Invalid credentials', StatusCodes.UNAUTHORIZED);
 
     const token: string = sign({ admin: dbUser?.admin }, String(process.env.SECRET_KEY), {
         expiresIn: '24h',

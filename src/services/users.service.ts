@@ -9,10 +9,10 @@ import * as schemas from '../schemas';
 export const createUserService = async (userPayload: t.TUserPayload): Promise<t.TUserResponse> => {
     const userRepo: Repository<User> = AppDataSource.getRepository(User);
 
-    const dbUser: User = userRepo.create(userPayload);
-    await userRepo.save(dbUser);
+    const userInstance: User = userRepo.create(userPayload);
+    await userRepo.save(userInstance);
 
-    const user: t.TUserResponse = schemas.userResponse.parse(dbUser);
+    const user: t.TUserResponse = schemas.userResponse.parse(userInstance);
 
     return user;
 };

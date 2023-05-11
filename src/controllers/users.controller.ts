@@ -10,7 +10,7 @@ export const createUserControler = async (req: Request, res: Response): Promise<
     return res.status(StatusCodes.CREATED).json(user);
 };
 
-export const readUsersController = async (__req: Request, res: Response): Promise<Response> => {
+export const readUsersController = async (_req: Request, res: Response): Promise<Response> => {
     const users = await services.readUsersService();
 
     return res.json(users);

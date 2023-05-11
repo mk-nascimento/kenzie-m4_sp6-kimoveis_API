@@ -3,7 +3,7 @@ import { ZodTypeAny } from 'zod';
 
 const bodySerializer =
     (schema: ZodTypeAny) =>
-    (req: Request, __res: Response, next: NextFunction): void => {
+    (req: Request, _res: Response, next: NextFunction): void => {
         req.body = schema.parse(req.body);
 
         return next();

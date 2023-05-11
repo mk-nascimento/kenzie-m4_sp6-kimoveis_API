@@ -15,8 +15,6 @@ export const validateToken = async (req: Request, res: Response, next: NextFunct
     const [_, token]: Array<string> = headersToken.split(' ');
 
     verify(token, SECRET_KEY, (err: any, decoded: any) => {
-        console.log(decoded);
-
         if (err) throw new AppError(err.message, StatusCodes.UNAUTHORIZED);
 
         res.locals.admin = decoded.admin;
@@ -26,10 +24,22 @@ export const validateToken = async (req: Request, res: Response, next: NextFunct
     return next();
 };
 
-export const validateAdmin = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const validateOnlyAdmin = async (_req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+    const admin: boolean = Boolean(res.locals.admin);
+
+    if (!admin) throw new AppError('Insufficient permission', StatusCodes.FORBIDDEN);
+
     return next();
 };
 
 export const notTheUserOrAdmin = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+    const notAdmin: boolean = !!!Boolean(res.locals.admin);
+    const loggedId: number = Number(res.locals.userId);
+    const paramsId: number = Number(res.locals.validId);
+
+    const notTheUser: boolean = loggedId !== paramsId;
+
+    if (notAdmin && notTheUser) throw new AppError('não é o usuário e nem admin', StatusCodes.UNAUTHORIZED);
+
     return next();
 };
