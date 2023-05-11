@@ -5,4 +5,5 @@ export const category = z.object({
     name: z.string().max(45),
 });
 
+export const categoryList = category.array();
 export const categoryPayload = category.omit({ id: true });
