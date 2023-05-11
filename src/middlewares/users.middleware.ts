@@ -7,13 +7,26 @@ import { User } from '../entities';
 import { AppError } from '../error';
 import { TUserPayload } from '../interfaces';
 
-export const validateEmail = async (req: Request, __res: Response, next: NextFunction): Promise<Response | void> => {
+export const validateEmail = async (req: Request, _res: Response, next: NextFunction): Promise<Response | void> => {
     const { email: reqEmail }: Pick<TUserPayload, 'email'> = req.body;
 
     const userRepo: Repository<User> = AppDataSource.getRepository(User);
     const emailExists: boolean = await userRepo.exist({ where: { email: reqEmail } });
 
     if (reqEmail && emailExists) throw new AppError('Email already exists', StatusCodes.CONFLICT);
+
+    return next();
+};
+
+export const validateUserId = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+    const paramsId: number = Number(req.params.id);
+
+    const userRepo: Repository<User> = AppDataSource.getRepository(User);
+    const validUser: boolean = await userRepo.exist({ where: { id: paramsId } });
+
+    if (!!!validUser) throw new AppError('User not found', StatusCodes.NOT_FOUND);
+
+    res.locals.validId = paramsId;
 
     return next();
 };

@@ -27,13 +27,13 @@ export class User {
     @Column({ type: 'varchar', length: 120 })
     password: string;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: 'date' })
     createdAt: Date | string;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ type: 'date' })
     updatedAt: Date | string;
 
-    @DeleteDateColumn({ nullable: true })
+    @DeleteDateColumn({ type: 'date', nullable: true })
     deletedAt: Date | string | null | undefined;
 
     @BeforeInsert()
@@ -41,8 +41,8 @@ export class User {
     hashPassword() {
         const cryptRounds: number = getRounds(this.password);
 
-        if (!!!cryptRounds) {
-            this.password = hashSync(this.password, 10);
+        if (!cryptRounds) {
+            this.password = hashSync(this.password);
         }
     }
 }

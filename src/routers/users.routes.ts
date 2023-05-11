@@ -7,6 +7,14 @@ import * as schemas from '../schemas';
 export const usersRouter: Router = Router();
 
 usersRouter.post('', mw.bodySerializer(schemas.userPayload), mw.validateEmail, ctrl.createUserControler);
-usersRouter.get('', mw.validateToken, ctrl.readUsersController);
-usersRouter.patch('/:id', () => console.log('U-Update realizando'));
-usersRouter.delete('/:id', () => console.log('D-Delete realizando'));
+usersRouter.get('', mw.validateToken, mw.validateOnlyAdmin, ctrl.readUsersController);
+usersRouter.patch(
+    '/:id',
+    mw.validateUserId,
+    mw.validateToken,
+    mw.notTheUserOrAdmin,
+    mw.bodySerializer(schemas.userUpdate),
+    mw.validateEmail,
+    ctrl.updateUserController
+);
+usersRouter.delete('/:id', mw.validateUserId, mw.validateToken, mw.validateOnlyAdmin, ctrl.deleteUserController);

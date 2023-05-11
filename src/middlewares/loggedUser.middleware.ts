@@ -32,14 +32,14 @@ export const validateOnlyAdmin = async (_req: Request, res: Response, next: Next
     return next();
 };
 
-export const notTheUserOrAdmin = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const notTheUserOrAdmin = async (_req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     const notAdmin: boolean = !!!Boolean(res.locals.admin);
     const loggedId: number = Number(res.locals.userId);
     const paramsId: number = Number(res.locals.validId);
 
     const notTheUser: boolean = loggedId !== paramsId;
 
-    if (notAdmin && notTheUser) throw new AppError('não é o usuário e nem admin', StatusCodes.UNAUTHORIZED);
+    if (notAdmin && notTheUser) throw new AppError('Insufficient permission', StatusCodes.FORBIDDEN);
 
     return next();
 };
