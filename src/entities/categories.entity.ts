@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { RealEstate } from '.';
 
 @Entity('categories')
 export class Category {
@@ -7,4 +8,7 @@ export class Category {
 
     @Column({ type: 'varchar', length: 45 })
     name: string;
+
+    @OneToMany(() => RealEstate, (realEstate) => realEstate.category)
+    realEstate: RealEstate[];
 }

@@ -14,3 +14,4 @@ categoriesRouter.post(
     crtl.createCategoryController
 );
 categoriesRouter.get('', crtl.readCategoriesController);
+categoriesRouter.get('/:id/realEstate', crtl.readCategoryWithRealEstateController);

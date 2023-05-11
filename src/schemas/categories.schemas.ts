@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { realEstateResponse } from './realEstate.schemas';
 
 export const category = z.object({
     id: z.number(),
@@ -7,3 +8,6 @@ export const category = z.object({
 
 export const categoryList = category.array();
 export const categoryPayload = category.omit({ id: true });
+export const categoryListWithProperties = category.extend({
+    realEstate: realEstateResponse.array(),
+});

@@ -6,8 +6,8 @@ export const realEstate = z.object({
     sold: z.boolean().default(false),
     value: z.number().nonnegative().default(0),
     size: z.number().int(),
-    createdAt: z.date(),
-    updatedAt: z.date(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
     addressId: z.number(),
     categoryId: z.number(),
 });
@@ -15,3 +15,5 @@ export const realEstate = z.object({
 export const realEstatePayload = realEstate.pick({ sold: true, value: true, size: true, categoryId: true }).extend({
     address: addressPayload,
 });
+
+export const realEstateResponse = realEstate.omit({ addressId: true, categoryId: true });
