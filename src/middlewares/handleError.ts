@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import { ZodError } from 'zod';
+
 import { AppError } from '../error';
 
 const { INTERNAL_SERVER_ERROR, BAD_REQUEST } = StatusCodes;

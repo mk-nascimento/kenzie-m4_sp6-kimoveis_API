@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { Category } from '../entities';
+
 import * as t from '../interfaces';
 import * as services from '../services';
-import { Category } from '../entities';
 
 export const createCategoryController = async (req: Request, res: Response): Promise<Response> => {
     const category: t.TCategory = await services.createCategorieService(req.body);

@@ -2,9 +2,9 @@ import { StatusCodes } from 'http-status-codes';
 import { Repository } from 'typeorm';
 
 import { AppDataSource } from '../data-source';
-import { Category, RealEstate } from '../entities';
-
+import { Category } from '../entities';
 import { AppError } from '../error';
+
 import * as t from '../interfaces';
 import * as schemas from '../schemas';
 

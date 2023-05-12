@@ -1,4 +1,5 @@
 import {
+    AfterLoad,
     Column,
     CreateDateColumn,
     Entity,
@@ -8,7 +9,8 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { Address, Category } from '.';
+
+import { Address, Category } from './';
 
 @Entity('real_estate')
 export class RealEstate {
@@ -36,4 +38,9 @@ export class RealEstate {
 
     @ManyToOne(() => Category, (category) => category.realEstate)
     category: Category;
+
+    @AfterLoad()
+    stringValue() {
+        this.value = Number(this.value).toFixed(2).toString();
+    }
 }

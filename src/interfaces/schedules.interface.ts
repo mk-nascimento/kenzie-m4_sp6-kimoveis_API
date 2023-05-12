@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import * as schemas from '../schemas';
 
 export type TSchedule = z.infer<typeof schemas.schedule>;

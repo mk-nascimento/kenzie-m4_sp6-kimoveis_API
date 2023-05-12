@@ -1,5 +1,7 @@
 import { z } from 'zod';
+
 import * as TORM from 'typeorm';
+
 import * as schemas from '../schemas';
 
 export type TUser = z.infer<typeof schemas.user>;

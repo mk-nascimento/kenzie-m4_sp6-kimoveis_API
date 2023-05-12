@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { realEstateResponse } from './realEstate.schemas';
 
 export const category = z.object({
