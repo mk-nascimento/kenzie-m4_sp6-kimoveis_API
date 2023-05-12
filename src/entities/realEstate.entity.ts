@@ -5,12 +5,13 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
 
-import { Address, Category } from './';
+import { Address, Category, Schedule } from './';
 
 @Entity('real_estate')
 export class RealEstate {
@@ -39,8 +40,11 @@ export class RealEstate {
     @ManyToOne(() => Category, (category) => category.realEstate)
     category: Category;
 
+    @OneToMany(() => Schedule, (schedule) => schedule.realEstate)
+    schedules: Schedule[];
+
     @AfterLoad()
     stringValue() {
-        this.value = Number(this.value).toFixed(2).toString();
+        if (this.value.toString().includes('.')) this.value = Number(this.value).toFixed(2).toString();
     }
 }

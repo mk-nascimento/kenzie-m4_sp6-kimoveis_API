@@ -2,10 +2,10 @@ import { z } from 'zod';
 
 export const schedule = z.object({
     id: z.number(),
-    date: z.date(),
-    hour: z.date(),
+    hour: z.string(),
+    date: z.string(),
     realEstateId: z.number(),
     userId: z.number(),
 });
 
-export const schedulePayload = schedule.omit({ id: true });
+export const schedulePayload = schedule.omit({ id: true, userId: true });
