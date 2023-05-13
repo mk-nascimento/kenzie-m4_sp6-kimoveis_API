@@ -6,7 +6,7 @@ import { AppError } from '../error';
 
 const { INTERNAL_SERVER_ERROR, BAD_REQUEST } = StatusCodes;
 
-const handleError = (err: Error, _req: Request, res: Response, _next: NextFunction): Response | void => {
+const handleError = (err: Error, _req: Request, res: Response, _next: NextFunction): Response => {
     if (err instanceof AppError) return res.status(err.statusCode).json({ message: err.message });
 
     if (err instanceof ZodError) return res.status(BAD_REQUEST).json({ message: err.flatten().fieldErrors });

@@ -31,7 +31,7 @@ export const readCategoriesService = async (): Promise<t.TCategoriesList> => {
     return categories;
 };
 
-export const readCategoryWithRealEstateService = async (paramsId: number): Promise<any> => {
+export const readCategoryWithRealEstateService = async (paramsId: number): Promise<Category> => {
     const categoryRepo: Repository<Category> = AppDataSource.getRepository(Category);
 
     const categoryExists: boolean = await categoryRepo.exist({ where: { id: paramsId } });

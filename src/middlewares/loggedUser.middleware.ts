@@ -6,7 +6,7 @@ import { verify } from 'jsonwebtoken';
 
 import { AppError } from '../error';
 
-export const validateToken = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const validateToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const SECRET_KEY: string | undefined = String(process.env.SECRET_KEY);
     const headersToken: string | undefined = req.headers.authorization;
 
@@ -24,7 +24,7 @@ export const validateToken = async (req: Request, res: Response, next: NextFunct
     return next();
 };
 
-export const validateOnlyAdmin = async (_req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const validateOnlyAdmin = async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
     const admin: boolean = Boolean(res.locals.admin);
 
     if (!admin) throw new AppError('Insufficient permission', StatusCodes.FORBIDDEN);
@@ -32,7 +32,7 @@ export const validateOnlyAdmin = async (_req: Request, res: Response, next: Next
     return next();
 };
 
-export const notTheUserOrAdmin = async (_req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const notTheUserOrAdmin = async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
     const notAdmin: boolean = !!!Boolean(res.locals.admin);
     const loggedId: number = Number(res.locals.userId);
     const paramsId: number = Number(res.locals.validId);

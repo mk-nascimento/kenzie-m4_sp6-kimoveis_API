@@ -8,7 +8,7 @@ import { AppError } from '../error';
 
 import * as t from '../interfaces';
 
-export const validRealEstateId = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const validRealEstateId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const schedulePayload: t.TSchedulePayload = req.body;
     const paramsId: number = Number(req.params.id);
     const payloadId: number = Number(schedulePayload.realEstateId);

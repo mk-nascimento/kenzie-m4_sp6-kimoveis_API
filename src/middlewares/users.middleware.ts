@@ -7,7 +7,7 @@ import { User } from '../entities';
 import { AppError } from '../error';
 import { TUserPayload } from '../interfaces';
 
-export const validateEmail = async (req: Request, _res: Response, next: NextFunction): Promise<Response | void> => {
+export const validateEmail = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     const { email: reqEmail }: Pick<TUserPayload, 'email'> = req.body;
 
     const userRepo: Repository<User> = AppDataSource.getRepository(User);
@@ -18,7 +18,7 @@ export const validateEmail = async (req: Request, _res: Response, next: NextFunc
     return next();
 };
 
-export const validateUserId = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const validateUserId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const paramsId: number = Number(req.params.id);
 
     const userRepo: Repository<User> = AppDataSource.getRepository(User);
