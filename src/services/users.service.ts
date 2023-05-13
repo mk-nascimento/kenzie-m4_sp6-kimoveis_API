@@ -49,6 +49,4 @@ export const softDeleteUserService = async (userId: number): Promise<void> => {
     const user: User | null = await userRepo.findOneBy({ id: userId });
 
     await userRepo.softRemove(user!);
-
-    return;
 };
