@@ -42,5 +42,5 @@ export const readCategoryWithRealEstateService = async (paramsId: number): Promi
         relations: { realEstate: true },
     });
 
-    return dbCategoryWithProperties;
+    return dbCategoryWithProperties!;
 };
