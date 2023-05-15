@@ -4,7 +4,7 @@ import { RealEstate } from './';
 
 @Entity('categories')
 export class Category {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment')
     id: number;
 
     @Column({ type: 'varchar', length: 45, unique: true })

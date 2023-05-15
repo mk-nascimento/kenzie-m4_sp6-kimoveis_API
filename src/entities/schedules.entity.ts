@@ -4,7 +4,7 @@ import { RealEstate, User } from './';
 
 @Entity('schedules')
 export class Schedule {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment')
     id: number;
 
     @Column({ type: 'date' })

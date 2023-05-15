@@ -15,7 +15,7 @@ import { Address, Category, Schedule } from './';
 
 @Entity('real_estate')
 export class RealEstate {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment')
     id: number;
 
     @Column({ type: 'boolean', default: false })
@@ -42,9 +42,4 @@ export class RealEstate {
 
     @OneToMany(() => Schedule, (schedule) => schedule.realEstate)
     schedules: Schedule[];
-
-    @AfterLoad()
-    stringValue() {
-        if (this.value.toString().includes('.')) this.value = Number(this.value).toFixed(2).toString();
-    }
 }
