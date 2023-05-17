@@ -1,6 +1,6 @@
-export type * from './addresses.interface';
-export type * from './categories.interface';
-export type * from './login.interface';
-export type * from './realEstate.interface';
-export type * from './schedules.interface';
-export type * from './users.interface';
+export * from './addresses.interface';
+export * from './categories.interface';
+export * from './login.interface';
+export * from './realEstate.interface';
+export * from './schedules.interface';
+export * from './users.interface';
